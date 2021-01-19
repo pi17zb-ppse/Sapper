@@ -7,10 +7,14 @@ using namespace sf;
 
 class SapperGame {
 public:
+	int position;
+public:
 	SapperGame();
 	void Rendering(RenderWindow& window);
 private:
 	int windowMenu(RenderWindow& window);
+	int windowSettings(RenderWindow& window);
+	int windowGame(RenderWindow& window);
 };
 
 #endif
