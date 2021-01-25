@@ -205,6 +205,9 @@ int SapperGame::windowGame(RenderWindow& window)
 	while (window.isOpen())
 	{
 		if (!isMenu)break;
+
+		// Получаем координаты курсора мышки относительно окна нашего приложения
+
 		int x = -1;
 		int y = -1;
 		Event e;
@@ -213,6 +216,7 @@ int SapperGame::windowGame(RenderWindow& window)
 			if (e.type == Event::Closed)
 				window.close();
 
+			// Определяем, была ли нажата кнопка мыши?
 			if (e.type == Event::MouseButtonPressed) {
 
 				if (IntRect(((0 + 2) * w) + xPosition, ((0 + 2) * w) + yPosition,
@@ -226,6 +230,8 @@ int SapperGame::windowGame(RenderWindow& window)
 								((j + 2) * w) + yPosition, w, w)
 								.contains(Mouse::getPosition(window)))
 							{
+								x = i;
+								y = j;
 								if (startGame)
 								{
 									startGame = false;
@@ -293,10 +299,49 @@ int SapperGame::windowGame(RenderWindow& window)
 							}
 						}
 					}
-
+					if (e.key.code == Mouse::Left)
+					{
+						if (x < sapperrWidth && y < sapperrHeight && x > -1 && y > -1)
+						{
+							gridView[x][y] = gridLogic[x][y];
+							if (gridLogic[x][y] == 9)
+								gameOver = 1;
+							gridView[x][y] = gridLogic[x][y];
+						}
+					}
+					// Если была нажата правая кнопка мыши, то отображаем флажок
+					if (e.key.code == Mouse::Right)
+					{
+						if (x < sapperrWidth && y < sapperrHeight && x > -1 && y > -1)
+						{
+							if (gridView[x][y] == 10 && minesR > 0)
+							{
+								gridView[x][y] = 11;
+							}
+							else if (gridView[x][y] == 11 && minesR <= mines)
+							{
+								gridView[x][y] = 10;
+							}
+						}
+						if (minesR == 0)
+						{
+							for (int i = 0; i < sapperrWidth; i++)
+								for (int j = 0; j < sapperrHeight; j++)
+								{
+									if (gridView[x][y] != 0)
+									{
+										if (i == sapperrWidth - 1 && j == sapperrHeight - 1)
+											gameOver = 2;
+									}
+									else
+										break;
+								}
+						}
+					}
 				}
 			}
 		}
+		//
 		position = 0;
 		spriteB1.setTextureRect(IntRect(0, 0, 220, 50));
 		spriteB2.setTextureRect(IntRect(0, 100, 220, 50));
@@ -304,7 +349,21 @@ int SapperGame::windowGame(RenderWindow& window)
 		if (IntRect(10, 10, 220, 50).contains(Mouse::getPosition(window))) { spriteB1.setTextureRect(IntRect(0, 50, 220, 50)); position = 1; }
 		if (IntRect(10, 65, 220, 50).contains(Mouse::getPosition(window))) { spriteB2.setTextureRect(IntRect(0, 150, 220, 50)); position = 3; }
 		if (IntRect(230, 10, 325, 100).contains(Mouse::getPosition(window))) { spriteB3.setTextureRect(IntRect(0, 105, 325, 100)); position = 4; }
-		
+		if (IntRect(10, 10, 220, 50).contains(Mouse::getPosition(window)))
+		{
+			spriteB1.setTextureRect(IntRect(0, 50, 220, 50));
+			position = 1;
+		}
+		if (IntRect(10, 65, 220, 50).contains(Mouse::getPosition(window)))
+		{
+			spriteB2.setTextureRect(IntRect(0, 150, 220, 50));
+			position = 3;
+		}
+		if (IntRect(230, 10, 325, 100).contains(Mouse::getPosition(window)))
+		{
+			spriteB3.setTextureRect(IntRect(0, 105, 325, 100));
+			position = 4;
+		}
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
 			if (position > 0)
@@ -312,8 +371,9 @@ int SapperGame::windowGame(RenderWindow& window)
 			if (position == 4)
 				position = 0;
 		}
-		window.clear(Color::White);
+		//
 
+		window.clear(Color::White);
 		if (gameOver != 2)
 		{
 			for (int i = 0; i < sapperrWidth; i++)
@@ -327,11 +387,21 @@ int SapperGame::windowGame(RenderWindow& window)
 				}
 		}
 
+		//
+
 		window.draw(spriteB1);
 		window.draw(spriteB2);
 		window.draw(spriteB3);
+		//
 		window.display();
 	}
+	for (int i = 0; i < sapperrWidth; i++)
+		delete[]gridLogic[i];
+	delete[]gridLogic;
+
+	for (int i = 0; i < sapperrWidth; i++)
+		delete[]gridView[i];
+	delete[]gridView;
 	if (position == 1) return 1;
 	if (position == 3) return 3;
 	return 0;
