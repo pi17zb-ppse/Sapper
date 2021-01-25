@@ -6,7 +6,10 @@
 using namespace sf;
 
 class SapperGame {
-public:
+private:
+	int sapperrWidth = 8;
+	int sapperrHeight = 8;
+	int mines = 10;
 	int position;
 public:
 	SapperGame();
