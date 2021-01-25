@@ -205,11 +205,97 @@ int SapperGame::windowGame(RenderWindow& window)
 	while (window.isOpen())
 	{
 		if (!isMenu)break;
+		int x = -1;
+		int y = -1;
 		Event e;
 		while (window.pollEvent(e))
 		{
 			if (e.type == Event::Closed)
 				window.close();
+
+			if (e.type == Event::MouseButtonPressed) {
+
+				if (IntRect(((0 + 2) * w) + xPosition, ((0 + 2) * w) + yPosition,
+					(sapperrWidth * w),
+					(sapperrHeight * w)).contains(Mouse::getPosition(window)))
+				{
+					for (int i = 0; i < sapperrWidth; i++) {
+						for (int j = 0; j < sapperrHeight; j++)
+						{
+							if (IntRect(((i + 2) * w) + xPosition,
+								((j + 2) * w) + yPosition, w, w)
+								.contains(Mouse::getPosition(window)))
+							{
+								if (startGame)
+								{
+									startGame = false;
+
+									for (int i = 0; i < mines;)
+									{
+										int naberW = rand() % (sapperrWidth - 1) + 1;
+										int naberH = rand() % (sapperrHeight - 1) + 1;
+										if (gridLogic[naberW][naberH] == 0 && naberW != x && naberH != y)
+										{
+											gridLogic[naberW][naberH] = 9;
+											i++;
+										}
+									}
+									// Подсчет мин вокруг каждой клетки	
+									for (int i = 0; i < sapperrWidth; i++) {
+										for (int j = 0; j < sapperrHeight; j++)
+										{
+											if (gridLogic[i][j] == 9)
+											{
+												if (i != 0)
+												{
+													if (gridLogic[i - 1][j] != 9)
+														gridLogic[i - 1][j] += 1;
+												}
+												if (j != 0)
+												{
+													if (gridLogic[i][j - 1] != 9)
+														gridLogic[i][j - 1] += 1;
+												}
+												if (i != sapperrWidth - 1)
+												{
+													if (gridLogic[i + 1][j] != 9)
+														gridLogic[i + 1][j] += 1;
+												}
+												if (j != sapperrHeight - 1)
+												{
+													if (gridLogic[i][j + 1] != 9)
+														gridLogic[i][j + 1] += 1;
+												}
+												if (i != 0 && j != 0)
+												{
+													if (gridLogic[i - 1][j - 1] != 9)
+														gridLogic[i - 1][j - 1] += 1;
+												}
+												if (i != 0 && j != sapperrHeight - 1)
+												{
+													if (gridLogic[i - 1][j + 1] != 9)
+														gridLogic[i - 1][j + 1] += 1;
+												}
+												if (i != sapperrWidth - 1 && j != 0)
+												{
+													if (gridLogic[i + 1][j - 1] != 9)
+														gridLogic[i + 1][j - 1] += 1;
+												}
+												if (i != sapperrWidth - 1 && j != sapperrHeight - 1)
+												{
+													if (gridLogic[i + 1][j + 1] != 9)
+														gridLogic[i + 1][j + 1] += 1;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+			}
 		}
 		position = 0;
 		spriteB1.setTextureRect(IntRect(0, 0, 220, 50));
@@ -233,6 +319,7 @@ int SapperGame::windowGame(RenderWindow& window)
 			for (int i = 0; i < sapperrWidth; i++)
 				for (int j = 0; j < sapperrHeight; j++)
 				{
+					gridView[i][j] = gridLogic[i][j];
 					if (gameOver == 1)
 						gridView[i][j] = gridLogic[i][j];
 					s.setTextureRect(IntRect(gridView[i][j] * w, 0, w, w));
