@@ -319,7 +319,7 @@ int SapperGame::windowGame(RenderWindow& window)
 			for (int i = 0; i < sapperrWidth; i++)
 				for (int j = 0; j < sapperrHeight; j++)
 				{
-					gridView[i][j] = gridLogic[i][j];
+					//gridView[i][j] = gridLogic[i][j];
 					if (gameOver == 1)
 						gridView[i][j] = gridLogic[i][j];
 					s.setTextureRect(IntRect(gridView[i][j] * w, 0, w, w));
