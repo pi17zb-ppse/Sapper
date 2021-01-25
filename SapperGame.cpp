@@ -2,6 +2,9 @@
 
 SapperGame::SapperGame()
 {
+	sapperrWidth = 8;
+	sapperrHeight = 8;
+	mines = 10;
 	position = 0;
 }
 
@@ -107,15 +110,37 @@ int SapperGame::windowSettings(RenderWindow& window)
 		spriteB4.setTextureRect(IntRect(0, 0, 326, 100));
 		if (IntRect(0, 0, 326, 100).contains(Mouse::getPosition(window))) { spriteB4.setTextureRect(IntRect(0, 105, 326, 100)); position1 = 4; }
 
+
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
+
 			if (position1 > 0)
 				isMenu = false;
+			if (position1 == 1)
+			{
+				sapperrWidth = 8;
+				sapperrHeight = 8;
+				mines = 10;
+			}
+			if (position1 == 2)
+			{
+				sapperrWidth = 16;
+				sapperrHeight = 16;
+				mines = 40;
+			}
+			if (position1 == 3)
+			{
+				sapperrWidth = 30;
+				sapperrHeight = 16;
+				mines = 99;
+			}
 			if (position1 == 4)
 			{
 				position = 0;
 			}
+			cout << "1" << endl;
 		}
+
 		window.clear();
 		window.draw(background);
 		window.draw(spriteB1);
