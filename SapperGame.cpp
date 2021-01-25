@@ -138,7 +138,6 @@ int SapperGame::windowSettings(RenderWindow& window)
 			{
 				position = 0;
 			}
-			cout << "1" << endl;
 		}
 
 		window.clear();
@@ -169,6 +168,40 @@ int SapperGame::windowGame(RenderWindow& window)
 	spriteB3.setTextureRect(IntRect(0, 0, 325, 100));
 	spriteB3.setPosition(230, 10);
 
+	int xPosition = 200;
+	int yPosition = 100;
+	int w = 32;
+	int minesR = mines;
+	String str;
+	int gameOver = 0;
+	bool startGame = true;
+	int** gridLogic = new int* [sapperrWidth];
+
+	for (int i = 0; i < sapperrWidth; i++)
+		gridLogic[i] = new int[sapperrHeight];
+
+	for (int i = 0; i < sapperrWidth; i++)
+	{
+		for (int j = 0; j < sapperrHeight; j++)
+			gridLogic[i][j] = 0;
+	}
+
+	int** gridView = new int* [sapperrWidth];
+
+	for (int i = 0; i < sapperrWidth; i++)
+		gridView[i] = new int[sapperrHeight];
+
+	// Загрузка текстуры и создание спрайта
+	Texture t;
+	t.loadFromFile("Image/tiles.jpg");
+	Sprite s(t);
+
+	for (int i = 0; i < sapperrWidth; i++)
+		for (int j = 0; j < sapperrHeight; j++)
+		{
+			gridView[i][j] = 10;
+		}
+
 	while (window.isOpen())
 	{
 		if (!isMenu)break;
@@ -194,6 +227,20 @@ int SapperGame::windowGame(RenderWindow& window)
 				position = 0;
 		}
 		window.clear(Color::White);
+
+		if (gameOver != 2)
+		{
+			for (int i = 0; i < sapperrWidth; i++)
+				for (int j = 0; j < sapperrHeight; j++)
+				{
+					if (gameOver == 1)
+						gridView[i][j] = gridLogic[i][j];
+					s.setTextureRect(IntRect(gridView[i][j] * w, 0, w, w));
+					s.setPosition(((i + 2) * w) + xPosition, ((j + 2) * w) + yPosition);
+					window.draw(s);
+				}
+		}
+
 		window.draw(spriteB1);
 		window.draw(spriteB2);
 		window.draw(spriteB3);
