@@ -326,6 +326,7 @@ int SapperGame::windowGame(RenderWindow& window)
 						if (minesR == 0)
 						{
 							for (int i = 0; i < sapperrWidth; i++)
+							{
 								for (int j = 0; j < sapperrHeight; j++)
 								{
 									if (gridView[x][y] != 0)
@@ -336,12 +337,13 @@ int SapperGame::windowGame(RenderWindow& window)
 									else
 										break;
 								}
+							}
 						}
 					}
 				}
 			}
 		}
-		//
+		
 		position = 0;
 		spriteB1.setTextureRect(IntRect(0, 0, 220, 50));
 		spriteB2.setTextureRect(IntRect(0, 100, 220, 50));
@@ -371,7 +373,6 @@ int SapperGame::windowGame(RenderWindow& window)
 			if (position == 4)
 				position = 0;
 		}
-		//
 
 		window.clear(Color::White);
 		if (gameOver != 2)
@@ -387,12 +388,10 @@ int SapperGame::windowGame(RenderWindow& window)
 				}
 		}
 
-		//
 
 		window.draw(spriteB1);
 		window.draw(spriteB2);
 		window.draw(spriteB3);
-		//
 		window.display();
 	}
 	for (int i = 0; i < sapperrWidth; i++)
