@@ -1,4 +1,3 @@
-#include <SFML/Graphics.hpp>
 #include "SapperGame.h"
 
 using namespace sf;
