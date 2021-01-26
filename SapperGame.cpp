@@ -196,6 +196,28 @@ int SapperGame::windowGame(RenderWindow& window)
 	t.loadFromFile("Image/tiles.jpg");
 	Sprite s(t);
 
+	
+	Font font;//רנטפע 
+	font.loadFromFile("CyrilicOld.TTF");
+
+	Text text, textMines;
+
+	//ןונוהאול םארולף רנטפעף פאיכ רנטפעא
+	text.setFont(font);
+	str = to_string(minesR);
+	text.setString(str);
+	text.setCharacterSize(24);
+	text.setFillColor(Color::Red);
+	text.setStyle(Text::Bold | Text::Underlined);
+	text.setPosition(400, 120);
+
+	textMines.setFont(font);
+	textMines.setString("ֱמלבû - ");
+	textMines.setCharacterSize(24);
+	textMines.setFillColor(Color::Red);
+	textMines.setStyle(Text::Bold | Text::Underlined);
+	textMines.setPosition(300, 120);
+
 	for (int i = 0; i < sapperrWidth; i++)
 		for (int j = 0; j < sapperrHeight; j++)
 		{
@@ -317,10 +339,16 @@ int SapperGame::windowGame(RenderWindow& window)
 						{
 							if (gridView[x][y] == 10 && minesR > 0)
 							{
+								minesR--;
+								str = to_string(minesR);
+								text.setString(str);
 								gridView[x][y] = 11;
 							}
 							else if (gridView[x][y] == 11 && minesR <= mines)
 							{
+								minesR++;
+								str = to_string(minesR);
+								text.setString(str);
 								gridView[x][y] = 10;
 							}
 						}
@@ -389,7 +417,8 @@ int SapperGame::windowGame(RenderWindow& window)
 		}
 
 		//
-
+		window.draw(text);
+		window.draw(textMines);
 		window.draw(spriteB1);
 		window.draw(spriteB2);
 		window.draw(spriteB3);

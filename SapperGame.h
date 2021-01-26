@@ -1,8 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include "windows.h"
+
 #ifndef MINESWEEPER_GAME_H
 #define MINESWEEPER_GAME_H
 
+using namespace std;
 using namespace sf;
 
 class SapperGame {
