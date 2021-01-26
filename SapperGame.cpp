@@ -191,10 +191,7 @@ int SapperGame::windowGame(RenderWindow& window)
 	for (int i = 0; i < sapperrWidth; i++)
 		gridView[i] = new int[sapperrHeight];
 
-	// Загрузка текстуры и создание спрайта
-	Texture t;
-	t.loadFromFile("Image/tiles.jpg");
-	Sprite s(t);
+	
 
 	
 	Font font;//шрифт 
@@ -218,6 +215,11 @@ int SapperGame::windowGame(RenderWindow& window)
 	textMines.setStyle(Text::Bold | Text::Underlined);
 	textMines.setPosition(300, 120);
 
+
+	// Загрузка текстуры и создание спрайта
+	Texture t;
+	t.loadFromFile("Image/tiles.jpg");
+	Sprite s(t);
 	for (int i = 0; i < sapperrWidth; i++)
 		for (int j = 0; j < sapperrHeight; j++)
 		{
