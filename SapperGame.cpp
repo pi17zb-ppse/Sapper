@@ -406,3 +406,63 @@ int SapperGame::windowGame(RenderWindow& window)
 	if (position == 3) return 3;
 	return 0;
 }
+
+void SapperGame::openCells(int**& gridLogic, int**& gridView, int x, int y, int& gameOver)
+{
+	if (x != 0)
+	{
+		if (gridView[x - 1][y] != 11)
+			gridView[x - 1][y] = gridLogic[x - 1][y];
+		if (gridLogic[x - 1][y] == 9 && gridView[x - 1][y] != 11)
+			gameOver = 1;
+	}
+	if (y != 0)
+	{
+		if (gridView[x][y - 1] != 11)
+			gridView[x][y - 1] = gridLogic[x][y - 1];
+		if (gridLogic[x][y - 1] == 9 && gridView[x][y - 1] != 11)
+			gameOver = 1;
+	}
+	if (x != sapperrWidth - 1)
+	{
+		if (gridView[x + 1][y] != 11)
+			gridView[x + 1][y] = gridLogic[x + 1][y];
+		if (gridLogic[x + 1][y] == 9 && gridView[x + 1][y] != 11)
+			gameOver = 1;
+	}
+	if (y != sapperrHeight - 1)
+	{
+		if (gridView[x][y + 1] != 11)
+			gridView[x][y + 1] = gridLogic[x][y + 1];
+		if (gridLogic[x][y + 1] == 9 && gridView[x][y + 1] != 11)
+			gameOver = 1;
+	}
+	if (x != 0 && y != 0)
+	{
+		if (gridView[x - 1][y - 1] != 11)
+			gridView[x - 1][y - 1] = gridLogic[x - 1][y - 1];
+		if (gridLogic[x - 1][y - 1] == 9 && gridView[x - 1][y - 1] != 11)
+			gameOver = 1;
+	}
+	if (x != 0 && y != sapperrHeight - 1)
+	{
+		if (gridView[x - 1][y + 1] != 11)
+			gridView[x - 1][y + 1] = gridLogic[x - 1][y + 1];
+		if (gridLogic[x - 1][y + 1] == 9 && gridView[x - 1][y + 1] != 11)
+			gameOver = 1;
+	}
+	if (x != sapperrWidth - 1 && y != 0)
+	{
+		if (gridView[x + 1][y - 1] != 11)
+			gridView[x + 1][y - 1] = gridLogic[x + 1][y - 1];
+		if (gridLogic[x + 1][y - 1] == 9 && gridView[x + 1][y - 1] != 11)
+			gameOver = 1;
+	}
+	if (x != sapperrWidth - 1 && y != sapperrHeight - 1)
+	{
+		if (gridView[x + 1][y + 1] != 11)
+			gridView[x + 1][y + 1] = gridLogic[x + 1][y + 1];
+		if (gridLogic[x + 1][y + 1] == 9 && gridView[x + 1][y + 1] != 11)
+			gameOver = 1;
+	}
+}

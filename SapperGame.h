@@ -18,6 +18,7 @@ private:
 	int windowMenu(RenderWindow& window);
 	int windowSettings(RenderWindow& window);
 	int windowGame(RenderWindow& window);
+	void openCells(int**& gridLogic, int**& gridView, int x, int y, int& gameOver);
 };
 
 #endif
