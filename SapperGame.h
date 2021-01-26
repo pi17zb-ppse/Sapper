@@ -20,11 +20,9 @@ private:
 	int windowMenu(RenderWindow& window);
 	int windowSettings(RenderWindow& window);
 	int windowGame(RenderWindow& window);
-<<<<<<< HEAD
 	void traversalRecursion(int**& gridLogic, int**& gridView, int X, int Y);
-=======
+	void checkMine(int**& gridLogic, int**& gridView, int x, int y, int& gameOver);
 	void openCells(int**& gridLogic, int**& gridView, int x, int y, int& gameOver);
->>>>>>> lab3.2
 };
 
 #endif

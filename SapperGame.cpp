@@ -324,6 +324,7 @@ int SapperGame::windowGame(RenderWindow& window)
 					if (e.key.code == Mouse::Left)
 					{
 						traversalRecursion(gridLogic, gridView, x, y);
+						checkMine(gridLogic, gridView, x, y, gameOver);
 						if (x < sapperrWidth && y < sapperrHeight && x > -1 && y > -1)
 						{
 							gridView[x][y] = gridLogic[x][y];
@@ -417,13 +418,8 @@ int SapperGame::windowGame(RenderWindow& window)
 				}
 		}
 
-<<<<<<< HEAD
-		//
 		window.draw(text);
 		window.draw(textMines);
-=======
-
->>>>>>> lab3.2
 		window.draw(spriteB1);
 		window.draw(spriteB2);
 		window.draw(spriteB3);
@@ -441,7 +437,7 @@ int SapperGame::windowGame(RenderWindow& window)
 	return 0;
 }
 
-<<<<<<< HEAD
+
 void SapperGame::traversalRecursion(int**& gridLogic, int**& gridView, int X, int Y)
 {
 	int x = X;
@@ -516,7 +512,51 @@ void SapperGame::traversalRecursion(int**& gridLogic, int**& gridView, int X, in
 
 			}
 		}
-=======
+	}
+}
+void SapperGame::checkMine(int**& gridLogic, int**& gridView, int x, int y, int& gameOver)
+{
+	int found = 0;
+	if (gridLogic[x][y] > 0 && gridLogic[x][y] < 9)
+	{
+		if (x != 0)
+		{
+			if (gridView[x - 1][y] == 11)found += 1;
+		}
+		if (y != 0)
+		{
+			if (gridView[x][y - 1] == 11)found += 1;
+		}
+		if (x != sapperrWidth - 1)
+		{
+			if (gridView[x + 1][y] == 11)found += 1;
+		}
+		if (y != sapperrHeight - 1)
+		{
+			if (gridView[x][y + 1] == 11)found += 1;
+		}
+		if (x != 0 && y != 0)
+		{
+			if (gridView[x - 1][y - 1] == 11)found += 1;
+		}
+		if (x != 0 && y != sapperrHeight - 1)
+		{
+			if (gridView[x - 1][y + 1] == 11)found += 1;
+		}
+		if (x != sapperrWidth - 1 && y != 0)
+		{
+			if (gridView[x + 1][y - 1] == 11)found += 1;
+		}
+		if (x != sapperrWidth - 1 && y != sapperrHeight - 1)
+		{
+			if (gridView[x + 1][y + 1] == 11)found += 1;
+		}
+		if (gridView[x][y] == found)
+		{
+			openCells(gridLogic, gridView, x, y, gameOver);
+		}
+	}
+}
 void SapperGame::openCells(int**& gridLogic, int**& gridView, int x, int y, int& gameOver)
 {
 	if (x != 0)
@@ -574,6 +614,5 @@ void SapperGame::openCells(int**& gridLogic, int**& gridView, int x, int y, int&
 			gridView[x + 1][y + 1] = gridLogic[x + 1][y + 1];
 		if (gridLogic[x + 1][y + 1] == 9 && gridView[x + 1][y + 1] != 11)
 			gameOver = 1;
->>>>>>> lab3.2
 	}
 }
