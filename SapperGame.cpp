@@ -200,7 +200,7 @@ int SapperGame::windowGame(RenderWindow& window)
 	Font font;//רנטפע 
 	font.loadFromFile("CyrilicOld.TTF");
 
-	Text text, textMines;
+	Text text, textMines, textVictory;
 
 	//ןונוהאול םארולף רנטפעף פאיכ רנטפעא
 	text.setFont(font);
@@ -217,6 +217,13 @@ int SapperGame::windowGame(RenderWindow& window)
 	textMines.setFillColor(Color::Red);
 	textMines.setStyle(Text::Bold | Text::Underlined);
 	textMines.setPosition(300, 120);
+
+	textVictory.setFont(font);
+	textVictory.setString("ֿמבוהא!!!");
+	textVictory.setCharacterSize(24);
+	textVictory.setFillColor(Color::Red);
+	textVictory.setStyle(Text::Bold | Text::Underlined);
+	textVictory.setPosition(300, 200);
 
 	for (int i = 0; i < sapperrWidth; i++)
 		for (int j = 0; j < sapperrHeight; j++)
