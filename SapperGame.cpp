@@ -301,6 +301,7 @@ int SapperGame::windowGame(RenderWindow& window)
 					}
 					if (e.key.code == Mouse::Left)
 					{
+						traversalRecursion(gridLogic, gridView, x, y);
 						if (x < sapperrWidth && y < sapperrHeight && x > -1 && y > -1)
 						{
 							gridView[x][y] = gridLogic[x][y];
