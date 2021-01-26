@@ -406,3 +406,80 @@ int SapperGame::windowGame(RenderWindow& window)
 	if (position == 3) return 3;
 	return 0;
 }
+
+void SapperGame::traversalRecursion(int**& gridLogic, int**& gridView, int X, int Y)
+{
+	int x = X;
+	int y = Y;
+	if (gridLogic[x][y] < 9)
+	{
+		gridView[x][y] = gridLogic[x][y];
+
+		if (x + 1 < sapperrWidth)
+		{
+			if (gridLogic[x + 1][y] == 0 && gridView[x + 1][y] != 0)
+			{
+				x++;
+				traversalRecursion(gridLogic, gridView, x, y);
+			}
+			else
+			{
+				if (gridLogic[x + 1][y] != 9 && gridLogic[x][y] == 0)
+					gridView[x + 1][y] = gridLogic[x + 1][y];
+			}
+		}
+
+		x = X;
+		y = Y;
+
+		if (x - 1 >= 0)
+		{
+			if (gridLogic[x - 1][y] == 0 && gridView[x - 1][y] != 0)
+			{
+				x--;
+				traversalRecursion(gridLogic, gridView, x, y);
+			}
+			else
+			{
+				if (gridLogic[x - 1][y] != 9 && gridLogic[x][y] == 0)
+					gridView[x - 1][y] = gridLogic[x - 1][y];
+
+			}
+		}
+
+		x = X;
+		y = Y;
+
+		if (y + 1 < sapperrWidth)
+		{
+			if (gridLogic[x][y + 1] == 0 && gridView[x][y + 1] != 0)
+			{
+				y++;
+				traversalRecursion(gridLogic, gridView, x, y);
+			}
+			else
+			{
+				if (gridLogic[x][y + 1] != 9 && gridLogic[x][y] == 0)
+					gridView[x][y + 1] = gridLogic[x][y + 1];
+			}
+		}
+
+		x = X;
+		y = Y;
+
+		if (y - 1 >= 0)
+		{
+			if (gridLogic[x][y - 1] == 0 && gridView[x][y - 1] != 0)
+			{
+				y--;
+				traversalRecursion(gridLogic, gridView, x, y);
+			}
+			else
+			{
+				if (gridLogic[x][y - 1] != 9 && gridLogic[x][y] == 0)
+					gridView[x][y - 1] = gridLogic[x][y - 1];
+
+			}
+		}
+	}
+}

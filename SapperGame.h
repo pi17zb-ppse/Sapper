@@ -18,6 +18,7 @@ private:
 	int windowMenu(RenderWindow& window);
 	int windowSettings(RenderWindow& window);
 	int windowGame(RenderWindow& window);
+	void traversalRecursion(int**& gridLogic, int**& gridView, int X, int Y);
 };
 
 #endif
