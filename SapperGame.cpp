@@ -355,6 +355,7 @@ int SapperGame::windowGame(RenderWindow& window)
 						if (minesR == 0)
 						{
 							for (int i = 0; i < sapperrWidth; i++)
+							{
 								for (int j = 0; j < sapperrHeight; j++)
 								{
 									if (gridView[x][y] != 0)
@@ -365,12 +366,13 @@ int SapperGame::windowGame(RenderWindow& window)
 									else
 										break;
 								}
+							}
 						}
 					}
 				}
 			}
 		}
-		//
+		
 		position = 0;
 		spriteB1.setTextureRect(IntRect(0, 0, 220, 50));
 		spriteB2.setTextureRect(IntRect(0, 100, 220, 50));
@@ -400,7 +402,6 @@ int SapperGame::windowGame(RenderWindow& window)
 			if (position == 4)
 				position = 0;
 		}
-		//
 
 		window.clear(Color::White);
 		if (gameOver != 2)
@@ -416,13 +417,16 @@ int SapperGame::windowGame(RenderWindow& window)
 				}
 		}
 
+<<<<<<< HEAD
 		//
 		window.draw(text);
 		window.draw(textMines);
+=======
+
+>>>>>>> lab3.2
 		window.draw(spriteB1);
 		window.draw(spriteB2);
 		window.draw(spriteB3);
-		//
 		window.display();
 	}
 	for (int i = 0; i < sapperrWidth; i++)
@@ -437,6 +441,7 @@ int SapperGame::windowGame(RenderWindow& window)
 	return 0;
 }
 
+<<<<<<< HEAD
 void SapperGame::traversalRecursion(int**& gridLogic, int**& gridView, int X, int Y)
 {
 	int x = X;
@@ -511,5 +516,64 @@ void SapperGame::traversalRecursion(int**& gridLogic, int**& gridView, int X, in
 
 			}
 		}
+=======
+void SapperGame::openCells(int**& gridLogic, int**& gridView, int x, int y, int& gameOver)
+{
+	if (x != 0)
+	{
+		if (gridView[x - 1][y] != 11)
+			gridView[x - 1][y] = gridLogic[x - 1][y];
+		if (gridLogic[x - 1][y] == 9 && gridView[x - 1][y] != 11)
+			gameOver = 1;
+	}
+	if (y != 0)
+	{
+		if (gridView[x][y - 1] != 11)
+			gridView[x][y - 1] = gridLogic[x][y - 1];
+		if (gridLogic[x][y - 1] == 9 && gridView[x][y - 1] != 11)
+			gameOver = 1;
+	}
+	if (x != sapperrWidth - 1)
+	{
+		if (gridView[x + 1][y] != 11)
+			gridView[x + 1][y] = gridLogic[x + 1][y];
+		if (gridLogic[x + 1][y] == 9 && gridView[x + 1][y] != 11)
+			gameOver = 1;
+	}
+	if (y != sapperrHeight - 1)
+	{
+		if (gridView[x][y + 1] != 11)
+			gridView[x][y + 1] = gridLogic[x][y + 1];
+		if (gridLogic[x][y + 1] == 9 && gridView[x][y + 1] != 11)
+			gameOver = 1;
+	}
+	if (x != 0 && y != 0)
+	{
+		if (gridView[x - 1][y - 1] != 11)
+			gridView[x - 1][y - 1] = gridLogic[x - 1][y - 1];
+		if (gridLogic[x - 1][y - 1] == 9 && gridView[x - 1][y - 1] != 11)
+			gameOver = 1;
+	}
+	if (x != 0 && y != sapperrHeight - 1)
+	{
+		if (gridView[x - 1][y + 1] != 11)
+			gridView[x - 1][y + 1] = gridLogic[x - 1][y + 1];
+		if (gridLogic[x - 1][y + 1] == 9 && gridView[x - 1][y + 1] != 11)
+			gameOver = 1;
+	}
+	if (x != sapperrWidth - 1 && y != 0)
+	{
+		if (gridView[x + 1][y - 1] != 11)
+			gridView[x + 1][y - 1] = gridLogic[x + 1][y - 1];
+		if (gridLogic[x + 1][y - 1] == 9 && gridView[x + 1][y - 1] != 11)
+			gameOver = 1;
+	}
+	if (x != sapperrWidth - 1 && y != sapperrHeight - 1)
+	{
+		if (gridView[x + 1][y + 1] != 11)
+			gridView[x + 1][y + 1] = gridLogic[x + 1][y + 1];
+		if (gridLogic[x + 1][y + 1] == 9 && gridView[x + 1][y + 1] != 11)
+			gameOver = 1;
+>>>>>>> lab3.2
 	}
 }
