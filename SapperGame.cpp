@@ -191,13 +191,10 @@ int SapperGame::windowGame(RenderWindow& window)
 	for (int i = 0; i < sapperrWidth; i++)
 		gridView[i] = new int[sapperrHeight];
 
-	
-
-	
 	Font font;//шрифт 
 	font.loadFromFile("CyrilicOld.TTF");
 
-	Text text, textMines;
+	Text text, textMines, textVictory;
 
 	//передаем нашему шрифту файл шрифта
 	text.setFont(font);
@@ -215,11 +212,17 @@ int SapperGame::windowGame(RenderWindow& window)
 	textMines.setStyle(Text::Bold | Text::Underlined);
 	textMines.setPosition(300, 120);
 
-
 	// Загрузка текстуры и создание спрайта
 	Texture t;
 	t.loadFromFile("Image/tiles.jpg");
 	Sprite s(t);
+	textVictory.setFont(font);
+	textVictory.setString("Победа!!!");
+	textVictory.setCharacterSize(24);
+	textVictory.setFillColor(Color::Red);
+	textVictory.setStyle(Text::Bold | Text::Underlined);
+	textVictory.setPosition(300, 200);
+
 	for (int i = 0; i < sapperrWidth; i++)
 		for (int j = 0; j < sapperrHeight; j++)
 		{
