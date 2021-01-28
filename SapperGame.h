@@ -8,110 +8,108 @@ using namespace std;
 using namespace sf;
 
 
-/**
+/*!
 * Игра сапер
 * 
 * Класс игры сапер
 * 
-* @autohor Бондаренко Евгений
-* @version 1.0.0.
-* @copyright GNU Public License
-* @todo Реализовать все методы
+* \author Бондаренко Евгений
+* \version 1.0.0.
 */
 
 
 class SapperGame {
-private:
-/**
+public:
+
+/*!
 * Ширина игрового поля
 * 
-* @var int  $sapperrWidth
-<<<<<<< HEAD
 */
+
 	int sapperrWidth;
-/**
+
+/*!
 * Высота игрового поля
 *
-* @var int  $sapperrHeight
 */
+
 	int sapperrHeight;
-/**
+
+/*!
 * Количество мин
 * 
-* @var int $mines
 */
+
 	int mines;
-/**
+
+/*!
 * Позиция в меню
 * 
-* @var int $position
 */
-=======
-*/
-	int sapperrWidth;
-/***/
-	int sapperrHeight;
-/***/
-	int mines;
-/***/
->>>>>>> lab4
+
 	int position;
 public:
 	SapperGame();
-/**
+
+/*!
 * Метод взаимодейсвий окон
-* @param RenderWindow $window
+* \param[out] window - ссылка на объект RenderWindow
 */
 	void Rendering(RenderWindow& window);
-private:
-/**
+
+/*!
 * Метод вызова окна меню
-* @param RenderWindow $window
-* @return $position
+* \param[in] window
+* \return position - возвращает позицыю перехода
 */
+
 	int windowMenu(RenderWindow& window);
 
-/**
+/*!
 * Метод вызова окна выбора сложности
-* @param RenderWindow $window
-* @return $position
+* \param[in] window
+* \return position - возвращает позицыю перехода
 */
+
 	int windowSettings(RenderWindow& window);
 
-/**
+/*!
 * Метод вызова окна игры
-* @param RenderWindow $window
-* @return $position
+* \param[in] window
+* \return position - возвращает позицыю перехода
 */
 	int windowGame(RenderWindow& window);
 
-/**
+/*!
 * Метод обхода по пустым клетка
-* @param int $gridLogic
-* @param int $gridView
-* @param int $X
-* @param int $Y
+* \param[in] gridLogic
+* \param[in] gridView
+* \param[in] X
+* \param[in] Y
 */
+
 	void traversalRecursion(int**& gridLogic, int**& gridView, int X, int Y);
 
-/**
+/*!
 * Метод проверки количеств флажков относительно указателя мины
-* @param int $gridLogic
-* @param int $gridView
-* @param int $X
-* @param int $Y
-* @param int $gameOver
+* \param[in] gridLogic
+* \param[in] gridView
+* \param[in] X
+* \param[in] Y
+* \param[in] gameOver
 */
+
 	void checkMine(int**& gridLogic, int**& gridView, int x, int y, int& gameOver);
 
-/**
+/*!
 * Метод обхода вокруг указателя мины
-* @param int $gridLogic
-* @param int $gridView
-* @param int $X
-* @param int $Y
-* @param int $gameOver
+* \param[in] gridLogic
+* \param[in] gridView
+* \param[in] X
+* \param[in] Y
+* \param[in] gameOver
 */
+
 	void openCells(int**& gridLogic, int**& gridView, int x, int y, int& gameOver);
 };
 
