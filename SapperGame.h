@@ -26,6 +26,7 @@ private:
 * Ширина игрового поля
 * 
 * @var int  $sapperrWidth
+<<<<<<< HEAD
 */
 	int sapperrWidth;
 /**
@@ -45,6 +46,15 @@ private:
 * 
 * @var int $position
 */
+=======
+*/
+	int sapperrWidth;
+/***/
+	int sapperrHeight;
+/***/
+	int mines;
+/***/
+>>>>>>> lab4
 	int position;
 public:
 	SapperGame();
