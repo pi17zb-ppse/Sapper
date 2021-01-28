@@ -26,22 +26,13 @@ private:
 * Ширина игрового поля
 * 
 * @var int  $sapperrWidth
-* 
-* Высота игрового поля
-*
-* @var int  $sapperrHeight
-* 
-* Количество ми
-* 
-* @var int $mines
-* 
-* Позиция в меню
-* 
-* @var int $position
 */
 	int sapperrWidth;
+/***/
 	int sapperrHeight;
+/***/
 	int mines;
+/***/
 	int position;
 public:
 	SapperGame();
